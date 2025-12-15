@@ -22,8 +22,19 @@ For credit your function must use a stack or a queue in a significant way.
     implementation must run in linear time.
 """
 
+# def even_digits(integer):
+#     result = ""
+#     for digit in str(integer):
+#         if int(digit) % 2 == 0:
+#             result += digit
+#     return int(result)
+
 def even_digits(integer):
-    pass # please replace with your solution
+    stack = node_stack.Stack(len(integer), len(integer) - 1)
+    for digit in stack:
+        if digit % 2 != 0:
+            stack.pop()
+    return stack
 
 
 
