@@ -17,33 +17,27 @@ Constructor:
     Accepts a brand name.  The fan should default to off and a speed of 0
 """
 class Fan:
-    pass # please replace with your solution
-    
+    __slots__ = ['brand', 'speed', 'on']
+    def __init__(self, brand, speed = 0, on = False):
+        self.brand = brand
+        self.speed = speed
+        self.on = on
 
-"""
-Complete the turn_on function below to update the state of the fan.
-Parameters:     
-    fan - a fan object
-    speed - the speed of the fan.  Must be between 1 and 10 (inclusive).  If outside
-        of that range, do not change the state of the fan.
-Returns:
-    True - if the speed was valid and fan is on.
-    False - otherwise
-
-"""
-def turn_on(fan,speed):
-    pass # please replace with your solution
+    def turn_on(self):
+        if 1 <= self.speed <= 10 and self.on == True:
+            return True
+        else:
+            return False
     
+    def turn_off(self):
+        if self.on == False:
+            self.speed = 0
 
-"""
-Complete the turn_off function below to update the state of the fan.  When a fan is off,
-the speed resets to 0.
-Parameters:    fan - a fan object
-Returns:    None
-"""
-def turn_off(fan):
-    pass # please replace with your solution
+    def get_state(self):
+        return (self.brand, self.on, self.speed)
     
+    def __str__(self):
+        return "(" + self.brand + ", " + str(self.on) + ", " + str(self.speed) + ")"
 
 """
 Complete the get_state function below.
@@ -56,20 +50,18 @@ Example:
     get_state(fan) returns ("Holmes", True, 3)
 More test cases in main() method
 """
-def get_state(fan):
-    return (fan.brand, fan.is_on, fan.speed)
-
 
 def main():
     fan = Fan("Holmes")
-    assert get_state(fan) == ("Holmes", False, 0)
-    assert turn_on(fan,3) == True
-    assert get_state(fan) == ("Holmes", True, 3)
-    turn_off(fan)
-    assert get_state(fan) == ("Holmes", False, 0)
-    assert turn_on(fan,5) == True
-    assert get_state(fan) == ("Holmes", True, 5)
-    assert turn_on(fan,11) == False
-    assert get_state(fan) == ("Holmes", True, 5)
+    print(fan)
+    assert Fan.get_state(fan) == ("Holmes", False, 0)
+    assert Fan.turn_on(fan,3) == True
+    assert Fan.get_state(fan) == ("Holmes", True, 3)
+    Fan.turn_off(fan)
+    assert Fan.get_state(fan) == ("Holmes", False, 0)
+    assert Fan.turn_on(fan,5) == True
+    assert Fan.get_state(fan) == ("Holmes", True, 5)
+    assert Fan.turn_on(fan,11) == False
+    assert Fan.get_state(fan) == ("Holmes", True, 5)
 
 if __name__ == "__main__":    main()
